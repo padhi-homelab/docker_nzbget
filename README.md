@@ -28,4 +28,4 @@ _<More details to be added soon>_
 
 
 [Alpine Linux]: https://alpinelinux.org/
-[nzbget]:  https://www.nzbget.org/
+[nzbget]:       https://nzbget.net/

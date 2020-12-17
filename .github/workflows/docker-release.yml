@@ -1,4 +1,4 @@
-name: "Docker CI Release (Latest)"
+name: "Docker CI Release"
 
 on:
   pull_request:
