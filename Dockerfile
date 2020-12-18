@@ -1,4 +1,4 @@
-FROM padhihomelab/alpine-base:edge AS nzbget-build
+FROM alpine:3.12 AS nzbget-build
 
 ARG NZBGET_VERSION=21.0
 ARG NZBGET_SHA_512=af8f346b00cb13f33ce9c04c028effae0ae84e3909410619eddb0d89a895fcbeb1458177cee22991bbe5308a83759aa097dbc6c2398c385518e520a6bfeb647c
@@ -43,9 +43,10 @@ RUN chmod +x /usr/bin/nzbget \
              /usr/local/bin/nzbget-server \
              /etc/docker-entrypoint.d/setup-volume.sh \
  && apk add --no-cache --update \
-            libxml2 \
             libssl1.1 \
+            libxml2 \
             p7zip \
+            tzdata \
             unrar \
             zlib
 
@@ -56,4 +57,4 @@ VOLUME [ "/config", "/data", "/downloads/complete", "/downloads/incomplete" ]
 CMD [ "nzbget-server" ]
 
 HEALTHCHECK --start-period=10s --interval=30s --timeout=5s --retries=3 \
-        CMD ["wget", "--tries", "5", "-qSO", "/dev/null",  "http://localhost:6789/"]
+        CMD ["nc", "-zv", "localhost", "6789"]
